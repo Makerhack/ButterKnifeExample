@@ -1,7 +1,5 @@
-package com.bq.butterknifeexample;
+package com.bq.butterknifeexample.ui;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,10 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bq.butterknifeexample.R;
+import com.bq.butterknifeexample.basecomponents.fragment.InjectableFragment;
 import com.bq.butterknifeexample.dummy.DummyContent;
 
 
-public class TextViewsFragment extends Fragment {
+public class TextViewsFragment extends InjectableFragment {
 
 
     private static final String KEY_ITEM = "item";
@@ -60,6 +60,11 @@ public class TextViewsFragment extends Fragment {
         contentTv.setTextColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
         detailsTv.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
         idTv.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
+
+    }
+
+    @Override
+    protected void refresh() {
 
     }
 

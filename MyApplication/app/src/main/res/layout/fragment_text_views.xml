@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="12dp"
-    tools:context="com.bq.butterknifeexample.TextViewsFragment">
+    tools:context=".ui.TextViewsFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

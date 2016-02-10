@@ -1,4 +1,4 @@
-package com.bq.butterknifeexample;
+package com.bq.butterknifeexample.ui;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,6 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bq.butterknifeexample.MyItemRecyclerViewAdapter;
+import com.bq.butterknifeexample.OnListFragmentInteractionListener;
+import com.bq.butterknifeexample.R;
+import com.bq.butterknifeexample.basecomponents.fragment.InjectableFragment;
 import com.bq.butterknifeexample.dummy.DummyContent;
 import com.bq.butterknifeexample.dummy.DummyContent.DummyItem;
 
@@ -20,11 +24,12 @@ import com.bq.butterknifeexample.dummy.DummyContent.DummyItem;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class ItemFragment extends Fragment implements OnListFragmentInteractionListener {
+public class ItemFragment extends InjectableFragment implements OnListFragmentInteractionListener {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     public static final String TAG = ItemFragment.class.getSimpleName();
     private int mColumnCount = 1;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -50,6 +55,11 @@ public class ItemFragment extends Fragment implements OnListFragmentInteractionL
     }
 
     @Override
+    protected void refresh() {
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
@@ -57,12 +67,9 @@ public class ItemFragment extends Fragment implements OnListFragmentInteractionL
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DummyContent.ITEMS, this));
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(DummyContent.createDummyItems(), this);
+            recyclerView.setAdapter(adapter);
         }
         return view;
     }
